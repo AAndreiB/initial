@@ -11,14 +11,30 @@ myAccount = driver.find_element_by_xpath('//a[text()="My Account"]') # using dif
 myAccount.click()
 
 # register user
-email = driver.find_element_by_css_selector("form.register input[type='email']")
-email.send_keys('qa.automat@yandex.ru')
-password = driver.find_element_by_css_selector("form.register input[type='password']")
-password.send_keys('secret_code')
 time.sleep(1)
-register = driver.find_element_by_css_selector("[value='Register']")
+email = driver.find_element_by_css_selector("form.register input[type='email']")
+email.send_keys('it.automat@yandex.ru')
+time.sleep(1)
+password = driver.find_element_by_css_selector("form.register input[type='password']")
+password.send_keys('secret_code_1234')
+time.sleep(1)
+register = driver.find_element_by_css_selector("input[name='register']")
 register.click()
 
-time.sleep(10)
+# My Account menu
+myAccount = driver.find_element_by_xpath('//a[text()="My Account"]') # using different types of selectors
+myAccount.click()
+
+time.sleep(1)
+email = driver.find_element_by_css_selector("form.login input[type='text']")
+email.send_keys('it.automat@yandex.ru')
+time.sleep(1)
+password = driver.find_element_by_css_selector("form.login input[type='password']")
+password.send_keys('secret_code_1234')
+time.sleep(1)
+submit = driver.find_element_by_css_selector("form.login input[type='submit']")
+submit.click()
+
+time.sleep(5)
 driver.quit()
 
