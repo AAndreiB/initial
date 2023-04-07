@@ -7,7 +7,7 @@ driver.get('https://practice.automationtesting.in/')
 driver.maximize_window()
 
 time.sleep(3)
-driver.execute_script("window.scrollBy(0, 600);")
+driver.execute_script("window.scrollBy(0, 500);")
 
 driver.find_element_by_css_selector("img[alt='Selenium Ruby']").click()
 

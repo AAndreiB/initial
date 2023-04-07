@@ -1,5 +1,7 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
-from selenium.webdriver.support.select import Select
 import time
 
 driver = webdriver.Chrome('C:\chromedriver\chromedriver.exe')
@@ -43,12 +45,14 @@ assert amount.text == "₹350.00"
 cart = driver.find_element_by_css_selector("a.wpmenucart-contents")
 cart.click()
 
-driver.implicitly_wait(3)
-subtotal = driver.find_element_by_css_selector("td[data-title='Subtotal']")
+wait = WebDriverWait(driver, 5)
+# subtotal = driver.find_element_by_css_selector("td[data-title='Subtotal']")
+subtotal = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "td[data-title='Subtotal']")))
 assert subtotal.text == "₹350.00" # check the value
 
-total = driver.find_element_by_css_selector("td[data-title='Total']")
-assert subtotal.text is not None # check that is not empty field
+# total = driver.find_element_by_css_selector("td[data-title='Total']")
+total = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "td[data-title='Total']")))
+assert total.text is not None # check that is not empty field
 
 time.sleep(3)
 driver.quit()

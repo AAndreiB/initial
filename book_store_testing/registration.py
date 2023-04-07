@@ -21,20 +21,6 @@ time.sleep(1)
 register = driver.find_element_by_css_selector("input[name='register']")
 register.click()
 
-# My Account menu
-myAccount = driver.find_element_by_xpath('//a[text()="My Account"]') # using different types of selectors
-myAccount.click()
-
-time.sleep(1)
-email = driver.find_element_by_css_selector("form.login input[type='text']")
-email.send_keys('it.automat@yandex.ru')
-time.sleep(1)
-password = driver.find_element_by_css_selector("form.login input[type='password']")
-password.send_keys('secret_code_1234')
-time.sleep(1)
-submit = driver.find_element_by_css_selector("form.login input[type='submit']")
-submit.click()
-
 time.sleep(5)
 driver.quit()
 
