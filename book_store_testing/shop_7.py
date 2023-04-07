@@ -38,15 +38,40 @@ email = driver.find_element_by_css_selector("input#billing_email")
 email.send_keys("it.automat@yandex.ru")
 phone = driver.find_element_by_css_selector("input#billing_phone")
 phone.send_keys("+71234567890")
+
 country = driver.find_element_by_css_selector("div.country_select span.select2-chosen")
 country.click()
 search = driver.find_element_by_css_selector("#select2-drop>.select2-search>[type='text']")
-search.send_keys("Iran")
+search.send_keys("Russia")
 
-time.sleep(2)
-lower = driver.find_element_by_id("select2-result-label-1104")
-lower.click()
+selected_country = driver.find_element_by_css_selector("li.select2-result-selectable")
+selected_country.click()
 
+# address
+street = driver.find_element_by_css_selector("input#billing_address_1")
+street.send_keys("Lenina")
+city = driver.find_element_by_css_selector("input#billing_city")
+city.send_keys("Novocheboksarsk")
+state = driver.find_element_by_css_selector("input#billing_state")
+state.send_keys("Chuvashia")
+postcode = driver.find_element_by_css_selector("input#billing_postcode")
+postcode.send_keys("429900")
+
+driver.execute_script("window.scrollBy(0, 300);")
 time.sleep(2)
+
+# payment option
+payment = driver.find_element_by_css_selector("input#payment_method_cheque")
+payment.click()
+place_order = driver.find_element_by_css_selector("input#place_order")
+place_order.click()
+
+# check messages
+wait = WebDriverWait(driver, 5)
+message = wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR, "p.woocommerce-thankyou-order-received"), "Thank you. Your order has been received."))
+assert message
+payment_method = wait.until(EC.text_to_be_present_in_element((By.XPATH, "//th[text()='Payment Method:']/../td"), "Check Payments"))
+assert payment_method
+
+time.sleep(1)
 driver.quit()
-
